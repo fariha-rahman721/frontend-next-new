@@ -20,7 +20,7 @@ interface Jewellery {
     img2: string;
 }
 
-const NewArrival = () => {
+const NewArrivals = () => {
     const [jewelleries, setJewelleries] = useState<Jewellery[]>([]);
     const [loading, setLoading] = useState(true);
     const [selectedProduct, setSelectedProduct] = useState<Jewellery | null>(null);
@@ -30,7 +30,7 @@ const NewArrival = () => {
         fetch('http://localhost:5000/jewelleries')
             .then((res) => res.json())
             .then((data) => {
-                setJewelleries(data.reverse().slice(0, 5));
+                setJewelleries(data.reverse());
                 setLoading(false);
             })
             .catch((err) => console.error('Error fetching jewelleries:', err));
@@ -49,7 +49,7 @@ const NewArrival = () => {
     if (loading) return <p className="text-center py-20">Loading new arrivals...</p>;
 
     return (
-        <section className="py-20 px-6 w-11/12 mx-auto">
+        <section className="py-20 px-6 mt-10 w-11/12 mx-auto">
             <div className="text-center mb-16">
                 <h4 className="italic text-yellow-600">Our New Arrivals</h4>
                 <h2 className="text-4xl md:text-5xl text-gray-700 serif italic">
@@ -165,4 +165,4 @@ const NewArrival = () => {
     );
 };
 
-export default NewArrival;
+export default NewArrivals;

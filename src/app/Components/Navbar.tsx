@@ -1,8 +1,9 @@
-"use client"; 
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { ShoppingBag, Menu, X, Search, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 interface NavbarProps {
   cartCount: number;
@@ -21,20 +22,21 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
 
   return (
     <nav
-       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${
-        isScrolled 
-          ? 'bg-white backdrop-blur-md py-4 border-gray-100 ' 
-          : 'bg-paper/40 backdrop-blur-sm py-5 border-white/10 text-white'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${isScrolled
+          ? 'bg-white backdrop-blur-md py-4 border-gray-100 '
+          : 'bg-black backdrop-blur-sm py-5 border-white/10 text-white'
+        }`}
     >
       <div className="w-11/12 mx-auto px-4 md:px-6 flex items-center justify-between">
         {/* Logo */}
-      <div className="flex-1">
-          <h1 className="text-2xl md:text-4xl serif font-light tracking-widest uppercase">
-            Aura
-          </h1>
+        <div className="flex-1">
+          <Link href="/">
+            <h1 className="text-2xl md:text-4xl serif font-light tracking-widest uppercase cursor-pointer">
+              Aura
+            </h1>
+          </Link>
         </div>
-        
+
         {/* Mobile Menu Button (LEFT side for better UX) */}
         <div className="md:hidden">
           <button onClick={() => setIsMobileMenuOpen(true)}>
@@ -44,14 +46,14 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
 
         {/* Desktop menu */}
         <div className="hidden md:flex items-center justify-center space-x-8 text-xs uppercase tracking-[0.2em] font-medium">
-          <a href="#" className="hover:text-gold transition-colors">Collections</a>
-          <a href="#" className="hover:text-gold transition-colors">Bespoke</a>
-          <a href="#" className="hover:text-gold transition-colors">Our Story</a>
-          <a href="#" className="hover:text-gold transition-colors">New Arrival</a>
+          <a href="/collections" className="hover:text-gold transition-colors">Collections</a>
+          <a href="/bespoke" className="hover:text-gold transition-colors">Bespoke</a>
+          <a href="/ourStory" className="hover:text-gold transition-colors">Our Story</a>
+          <a href="/newArrivals" className="hover:text-gold transition-colors">New Arrival</a>
         </div>
 
-      
-        
+
+
 
         {/* Icons */}
         <div className="flex items-center space-x-4 md:space-x-6">
@@ -81,19 +83,21 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 bg-paper z-[60] flex flex-col p-8"
+            className="fixed top-0 right-0 h-full w-64 sm:w-72 bg-black text-white z-[60] flex flex-col p-6 shadow-2xl rounded-l-2xl"
           >
-            <div className="flex justify-end mb-12">
-              <button onClick={() => setIsMobileMenuOpen(false)}>
-                <X size={32} strokeWidth={1} />
+            {/* Close Button */}
+            <div className="flex justify-end mb-8">
+              <button onClick={() => setIsMobileMenuOpen(false)} className="text-black hover:text-yellow-500 transition-colors">
+                <X size={28} strokeWidth={1} />
               </button>
             </div>
 
-            <div className="flex flex-col space-y-8 text-2xl serif italic">
-              <a href="#" onClick={() => setIsMobileMenuOpen(false)}>Collections</a>
-              <a href="#" onClick={() => setIsMobileMenuOpen(false)}>Bespoke Services</a>
-              <a href="#" onClick={() => setIsMobileMenuOpen(false)}>Our Heritage</a>
-              <a href="#" onClick={() => setIsMobileMenuOpen(false)}>Contact Us</a>
+            {/* Menu Links */}
+            <div className="flex flex-col bg-white text-black space-y-6">
+              <a href="/collections" className="text-black text-md pl-4 pt-3 font-medium hover:bg-yellow-500 hover:text-white transition-colors">Collections</a>
+              <a href="/bespoke" className="text-black text-md pl-4 pt-3 hover:bg-yellow-500 hover:text-white transition-colors">Bespoke</a>
+              <a href="/ourStory" className="text-black text-md pl-4 pt-3 hover:bg-yellow-500 hover:text-white transition-colors">Our Story</a>
+              <a href="/newArrivals" className="text-black text-md pl-4 pt-3 hover:bg-yellow-500 hover:text-white transition-colors">New Arrival</a>
             </div>
           </motion.div>
         )}
