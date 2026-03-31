@@ -18,7 +18,7 @@ const GlowByMoment = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/wedding')
+        axios.get('http://next-backend-3yj8sakwt-farihas-projects-7a667e13.vercel.app/wedding')
             .then(res => {
                 setData(res.data);
                 setLoading(false);

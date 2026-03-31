@@ -36,7 +36,7 @@ const Collection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:5000/jewelleries")
+    fetch("http://next-backend-3yj8sakwt-farihas-projects-7a667e13.vercel.app/jewelleries")
       .then((res) => res.json())
       .then((data) => {
         setJewelleries(data);
