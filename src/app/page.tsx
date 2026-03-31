@@ -2,7 +2,9 @@ import Collection from "./Components/Collection";
 import { Headline } from "./Components/Headline";
 import { Hero } from "./Components/Hero";
 import Recommendation from "./Components/NewArrival";
+import Occasion from "./Components/WeddingCollection";
 import { Signature } from "./Components/Signature";
+import WeddingCollection from "./Components/WeddingCollection";
 
 
 export default function Home() {
@@ -13,6 +15,7 @@ export default function Home() {
       <Signature></Signature>
       <Collection></Collection>
       <Recommendation></Recommendation>
+      <WeddingCollection></WeddingCollection>
     </div>
   );
 }

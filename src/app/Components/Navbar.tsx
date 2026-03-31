@@ -47,7 +47,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
         {/* Desktop menu */}
         <div className="hidden md:flex items-center justify-center space-x-8 text-xs uppercase tracking-[0.2em] font-medium">
           <a href="/collections" className="hover:text-gold transition-colors">Collections</a>
-          <a href="/bespoke" className="hover:text-gold transition-colors">Bespoke</a>
+          <a href="/glowByMoment" className="hover:text-gold transition-colors">Glow By Moment</a>
           <a href="/ourStory" className="hover:text-gold transition-colors">Our Story</a>
           <a href="/newArrivals" className="hover:text-gold transition-colors">New Arrival</a>
         </div>
@@ -60,9 +60,9 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
           <button className="hidden md:block hover:text-gold transition-colors">
             <Search size={20} strokeWidth={1.5} />
           </button>
-          <button className="hidden md:block hover:text-gold transition-colors">
+          <Link href="/login" className="hidden md:block hover:text-gold transition-colors">
             <User size={20} strokeWidth={1.5} />
-          </button>
+          </Link>
 
           <button onClick={onCartClick} className="relative hover:text-gold transition-colors">
             <ShoppingBag size={20} strokeWidth={1.5} />
@@ -95,7 +95,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
             {/* Menu Links */}
             <div className="flex flex-col bg-white text-black space-y-6">
               <a href="/collections" className="text-black text-md pl-4 pt-3 font-medium hover:bg-yellow-500 hover:text-white transition-colors">Collections</a>
-              <a href="/bespoke" className="text-black text-md pl-4 pt-3 hover:bg-yellow-500 hover:text-white transition-colors">Bespoke</a>
+              <a href="/glowByMoment" className="text-black text-md pl-4 pt-3 hover:bg-yellow-500 hover:text-white transition-colors">Glow By Moment</a>
               <a href="/ourStory" className="text-black text-md pl-4 pt-3 hover:bg-yellow-500 hover:text-white transition-colors">Our Story</a>
               <a href="/newArrivals" className="text-black text-md pl-4 pt-3 hover:bg-yellow-500 hover:text-white transition-colors">New Arrival</a>
             </div>

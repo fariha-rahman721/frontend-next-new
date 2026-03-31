@@ -83,7 +83,7 @@ const Collection = () => {
 
       {/* GRID */}
       <motion.div layout className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-5">
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           {currentItems.map((item) => (
             <motion.div
               layout
@@ -92,7 +92,7 @@ const Collection = () => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
               transition={{ duration: 0.3 }}
-               onClick={() => handleViewDetails(item)}
+              onClick={() => handleViewDetails(item)}
               className="bg-white shadow-lg  overflow-hidden hover:scale-105 transition-transform duration-300 relative"
             >
               <div className="w-full overflow-hidden">
@@ -110,7 +110,7 @@ const Collection = () => {
                 <p className="text-xs text-yellow-600 mb-1">{item.materials.join(", ")}</p>
 
                 {/* ✅ Trigger modal */}
-                
+
               </div>
             </motion.div>
           ))}
