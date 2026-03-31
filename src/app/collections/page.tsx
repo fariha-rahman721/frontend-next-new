@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Category from "../Components/Category";
 import { ProductModal } from "../Components/ProductModal";
+import axios from "axios";
 
 interface Jewellery {
     id: number;
@@ -30,11 +31,10 @@ const Collections = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
-        fetch("http://next-backend-3yj8sakwt-farihas-projects-7a667e13.vercel.app/jewelleries")
-            .then((res) => res.json())
-            .then((data) => {
-                setJewelleries(data);
-                setFiltered(data);
+        axios.get("http://next-backend-3yj8sakwt-farihas-projects-7a667e13.vercel.app/jewelleries")
+            .then((res) => {
+                setJewelleries(res.data);
+                setFiltered(res.data);
                 setLoading(false);
             })
             .catch((err) => console.error("Error fetching jewelleries:", err));

@@ -36,14 +36,14 @@ const Collection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    fetch("http://next-backend-3yj8sakwt-farihas-projects-7a667e13.vercel.app/jewelleries")
+    ("http://next-backend-3yj8sakwt-farihas-projects-7a667e13.vercel.app/jewelleries")
       .then((res) => res.json())
       .then((data) => {
         setJewelleries(data);
         setFiltered(data);
         setLoading(false);
       })
-      .catch((err) => console.error("Error fetching jewelleries:", err));
+      .catch((err) => console.error("Error ing jewelleries:", err));
   }, []);
 
   const handleFilter = (category: string) => {
