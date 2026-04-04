@@ -28,7 +28,7 @@ const NewArrivals = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}//jewelleries")
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/jewelleries`)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(`HTTP error! status: ${ res.status }`);
