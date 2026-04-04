@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Plus, X } from 'lucide-react';
-import axios from 'axios';
+
 
 interface Jewellery {
     id: number;
@@ -28,9 +28,18 @@ const NewArrival = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
-        axios
-            .get("https://next-backend-3yj8sakwt-farihas-projects-7a667e13.vercel.app/jewelleries")
-            .then((res) => setJewelleries(res.data))
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/jewelleries`)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                return res.json();
+            })
+            .then((data) => {
+                setJewelleries(data);
+                setSelectedProduct(data[0]); // Set first product as default for modal
+                setLoading(false);
+            })
             .catch((err) => console.error("Error fetching jewelleries:", err));
     }, []);
 

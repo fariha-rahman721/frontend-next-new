@@ -1,9 +1,9 @@
 'use client';
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star } from "lucide-react";
+
 import Category from "./Category";
-import { ProductModal } from "./ProductModal"; // <-- import your modal
+import { ProductModal } from "./ProductModal"; 
 
 interface Jewellery {
   id: number;
@@ -36,14 +36,19 @@ const Collection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    ("http://next-backend-3yj8sakwt-farihas-projects-7a667e13.vercel.app/jewelleries")
-      .then((res) => res.json())
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/jewelleries`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${ res.status }`);
+        }
+        return res.json();
+      })
       .then((data) => {
         setJewelleries(data);
         setFiltered(data);
         setLoading(false);
       })
-      .catch((err) => console.error("Error ing jewelleries:", err));
+      .catch((err) => console.error("Error fetching jewelleries:", err));
   }, []);
 
   const handleFilter = (category: string) => {
@@ -60,7 +65,7 @@ const Collection = () => {
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const currentItems = filtered.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
-  // ✅ Open modal
+  //  Open modal
   const handleViewDetails = (product: Jewellery) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
@@ -123,10 +128,10 @@ const Collection = () => {
           <button
             key={page}
             onClick={() => setCurrentPage(page)}
-            className={`px-4 py-1.5 text-sm rounded-full border transition-all duration-300
-              ${currentPage === page
-                ? "bg-gray-800 text-white border-gray-800"
-                : "bg-white text-gray-600 border-gray-300 hover:bg-gray-800 hover:text-white"
+            className={`px - 4 py - 1.5 text - sm rounded - full border transition - all duration - 300
+              ${ currentPage === page
+      ? "bg-gray-800 text-white border-gray-800"
+      : "bg-white text-gray-600 border-gray-300 hover:bg-gray-800 hover:text-white"
               }`}
           >
             {page}

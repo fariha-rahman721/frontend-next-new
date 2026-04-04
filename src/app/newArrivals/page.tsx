@@ -28,12 +28,19 @@ const NewArrivals = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
-        axios.get('http://next-backend-3yj8sakwt-farihas-projects-7a667e13.vercel.app/jewelleries')
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}//jewelleries")
             .then((res) => {
-                setJewelleries(res.data.reverse());
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${ res.status }`);
+                }
+                return res.json();
+            })
+            .then((data) => {
+                setJewelleries(data);
+                setSelectedProduct(data[0]); // Set first product as default for modal
                 setLoading(false);
             })
-            .catch((err) => console.error('Error fetching jewelleries:', err));
+            .catch((err) => console.error("Error fetching jewelleries:", err));
     }, []);
 
     const openModal = (product: Jewellery) => {
@@ -77,7 +84,7 @@ const NewArrivals = () => {
                             />
                             <div className="absolute inset-0 bg-black/0 hover:bg-black/10 transition-colors duration-500 rounded-xl" />
                             <button
-                                onClick={(e) => { e.stopPropagation(); alert(`Added ${item.name} to cart`); }}
+                                onClick={(e) => { e.stopPropagation(); alert(`Added ${ item.name } to cart`); }}
                                 className="absolute bottom-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-yellow-600 hover:text-white transition-all"
                             >
                                 <Plus size={18} />

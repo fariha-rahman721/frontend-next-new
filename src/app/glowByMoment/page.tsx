@@ -18,15 +18,18 @@ const GlowByMoment = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('http://next-backend-3yj8sakwt-farihas-projects-7a667e13.vercel.app/wedding')
-            .then(res => {
-                setData(res.data);
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/wedding`)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${ res.status }`);
+                }
+                return res.json();
+            })
+            .then((data) => {
+                setData(data);
                 setLoading(false);
             })
-            .catch(err => {
-                console.log(err);
-                setLoading(false);
-            });
+            .catch((err) => console.error("Error fetching wedding items:", err));
     }, []);
 
     if (loading) {
@@ -150,7 +153,7 @@ const GlowByMoment = () => {
                             key={item._id}
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-16 lg:gap-24 items-center`}
+                            className={`flex flex - col ${ index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap - 16 lg: gap - 24 items - center`}
                         >
 
                             {/* Image */}

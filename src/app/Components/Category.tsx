@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 
 interface Jewellery {
     id: number;
@@ -12,16 +12,12 @@ interface CategoryProps {
 }
 
 const Category: React.FC<CategoryProps> = ({ jewelleries, onFilter }) => {
-    const [categories, setCategories] = useState<string[]>([]);
     const [activeCategory, setActiveCategory] = useState("All");
 
-    useEffect(() => {
-        const uniqueCategories = [
-            "All",
-            ...new Set(jewelleries.map((item) => item.category)),
-        ];
-        setCategories(uniqueCategories);
-    }, [jewelleries]);
+    const categories = useMemo(() => [
+        "All",
+        ...Array.from(new Set(jewelleries.map(item => item.category)))
+    ], [jewelleries]);
 
     const handleClick = (category: string) => {
         setActiveCategory(category);
@@ -34,11 +30,12 @@ const Category: React.FC<CategoryProps> = ({ jewelleries, onFilter }) => {
                 <button
                     key={cat}
                     onClick={() => handleClick(cat)}
+                    aria-pressed={activeCategory === cat}
                     className={`px-4 py-1.5 text-xs uppercase tracking-wider rounded-full border transition-all duration-300
-          ${activeCategory === cat
+                      ${activeCategory === cat
                             ? "bg-yellow-600 text-white"
                             : "bg-white text-gray-600 hover:bg-yellow-600 hover:text-white"
-                        }`}
+                      }`}
                 >
                     {cat}
                 </button>

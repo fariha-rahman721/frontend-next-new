@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, Send, X, Bot } from 'lucide-react';
+import { aiService } from '@/aiService';
 
 
 export const AIChatbot: React.FC = () => {
@@ -23,7 +24,7 @@ export const AIChatbot: React.FC = () => {
     });
   }, [messages]);
 
-  // ✅ focus input when open
+  // focus input when open
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => inputRef.current?.focus(), 200);

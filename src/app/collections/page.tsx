@@ -31,10 +31,16 @@ const Collections = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
-        axios.get("http://next-backend-3yj8sakwt-farihas-projects-7a667e13.vercel.app/jewelleries")
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}//jewelleries")
             .then((res) => {
-                setJewelleries(res.data);
-                setFiltered(res.data);
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${ res.status }`);
+                }
+                return res.json();
+            })
+            .then((data) => {
+                setJewelleries(data);
+                setFiltered(data);
                 setLoading(false);
             })
             .catch((err) => console.error("Error fetching jewelleries:", err));

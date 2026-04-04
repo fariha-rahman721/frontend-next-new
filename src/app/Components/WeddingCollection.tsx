@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+
 import { motion } from 'framer-motion';
 
 interface WeddingItem {
@@ -18,17 +18,19 @@ const WeddingCollection = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('http://next-backend-3yj8sakwt-farihas-projects-7a667e13.vercel.app/wedding')
-            .then(res => {
-                setData(res.data);
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/wedding`)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${ res.status }`);
+                }
+                return res.json();
+            })
+            .then((data) => {
+                setData(data);
                 setLoading(false);
             })
-            .catch(err => {
-                console.log(err);
-                setLoading(false);
-            });
+            .catch((err) => console.error("Error fetching wedding items:", err));
     }, []);
-
     if (loading) {
         return <div className="text-center pt-40">Loading...</div>;
     }
@@ -71,7 +73,7 @@ const WeddingCollection = () => {
                             key={item._id}
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-16 lg:gap-24 items-center`}
+                            className={`flex flex - col ${ index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap - 16 lg: gap - 24 items - center`}
                         >
 
                             {/* Image */}
